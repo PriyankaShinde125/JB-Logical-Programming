@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Main {
     public static final int PRINT_FIBONACCI_SERIES = 1;
     public static final int PERFECT_NUMBER = 2;
+    public static final int IS_PRIME = 3;
     public static final int SQUARE_ROOT = 5;
     public static final int CONVERT_TO_BINARY = 6;
     public static final int SWAP_NIBBLES = 7;
@@ -12,6 +13,7 @@ public class Main {
         System.out.println("Enter your choice : ");
         System.out.println("1 : Print fibonacci series");
         System.out.println("2 : Check whether it is perfect number");
+        System.out.println("3 : Check whether number is prime or not");
         System.out.println("5 : find square root");
         System.out.println("6 : print equivalent binary");
         System.out.println("7 : Print decimal number after swapping two nibbles");
@@ -24,6 +26,9 @@ public class Main {
                 break;
             case PERFECT_NUMBER:
                 mainObj.isPerfect();
+                break;
+            case IS_PRIME:
+                mainObj.isPrime();
                 break;
             case SQUARE_ROOT:
                 findSqrt();
@@ -40,6 +45,23 @@ public class Main {
                 System.out.println("INVALID CHOICE");
                 break;
         }
+    }
+
+    private void isPrime() {
+        System.out.println("Enter a number : ");
+        int num = sc.nextInt();
+        boolean isPrime = true;
+        if (num == 2)
+            isPrime = true;
+        else {
+            for (int i = 2; i < num / 2; i++) {
+                if (num % i == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+        }
+        System.out.println(isPrime ? "It is prime number" : "It is not prime number");
     }
 
     private void isPerfect() {
