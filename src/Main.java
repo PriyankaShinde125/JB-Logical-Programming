@@ -4,6 +4,7 @@ public class Main {
     public static final int PRINT_FIBONACCI_SERIES = 1;
     public static final int PERFECT_NUMBER = 2;
     public static final int IS_PRIME = 3;
+    public static final int REVERSE_NUMBER = 4;
     public static final int SQUARE_ROOT = 5;
     public static final int CONVERT_TO_BINARY = 6;
     public static final int SWAP_NIBBLES = 7;
@@ -14,6 +15,7 @@ public class Main {
         System.out.println("1 : Print fibonacci series");
         System.out.println("2 : Check whether it is perfect number");
         System.out.println("3 : Check whether number is prime or not");
+        System.out.println("4 : Print reverse number");
         System.out.println("5 : find square root");
         System.out.println("6 : print equivalent binary");
         System.out.println("7 : Print decimal number after swapping two nibbles");
@@ -30,6 +32,9 @@ public class Main {
             case IS_PRIME:
                 mainObj.isPrime();
                 break;
+            case REVERSE_NUMBER:
+                mainObj.reverseNumber();
+                break;
             case SQUARE_ROOT:
                 findSqrt();
                 break;
@@ -45,6 +50,18 @@ public class Main {
                 System.out.println("INVALID CHOICE");
                 break;
         }
+    }
+
+    private void reverseNumber() {
+        System.out.println("Enter a number : ");
+        int num = sc.nextInt();
+        int reverse = 0;
+        while (num > 0) {
+            int rem = num % 10;
+            reverse = reverse * 10 + rem;
+            num = num / 10;
+        }
+        System.out.println("Reverse number is " + reverse);
     }
 
     private void isPrime() {
