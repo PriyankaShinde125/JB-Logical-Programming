@@ -23,7 +23,7 @@ public class Main {
                 break;
             case SWAP_NIBBLES:
                 Binary b = new Binary();
-                b.swapNibbles();
+                b.isPowerOfTwo();
                 break;
             default:
                 System.out.println("INVALID CHOICE");
