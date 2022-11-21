@@ -8,6 +8,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         num = sc.nextDouble();
         findSqrt(num, epsilon);
+        toBinary((int) num);
 
     }
 
@@ -24,5 +25,18 @@ public class Main {
             t = root;
         }
         System.out.println("Square root of " + c + " is " + t);
+    }
+
+    private static void toBinary(int decimal) {
+        int MAX_SIZE=100;
+        int binary[] = new int[MAX_SIZE];
+        int index = 0;
+        while (decimal > 0) {
+            binary[index++] = decimal % 2;
+            decimal = decimal / 2;
+        }
+        for (int i = index - 1; i >= 0; i--) {
+            System.out.print(binary[i]);
+        }
     }
 }
