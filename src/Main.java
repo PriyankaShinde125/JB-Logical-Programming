@@ -8,6 +8,7 @@ public class Main {
     public static final int SQUARE_ROOT = 5;
     public static final int CONVERT_TO_BINARY = 6;
     public static final int SWAP_NIBBLES = 7;
+    public static final int COUPAN_NUMBER = 8;
     static Scanner sc;
 
     public static void main(String[] args) {
@@ -19,6 +20,7 @@ public class Main {
         System.out.println("5 : find square root");
         System.out.println("6 : print equivalent binary");
         System.out.println("7 : Print decimal number after swapping two nibbles");
+        System.out.println("8 : Generate coupan number");
         sc = new Scanner(System.in);
         Main mainObj = new Main();
         int choice = sc.nextInt();
@@ -46,10 +48,26 @@ public class Main {
                 Binary b = new Binary();
                 b.isPowerOfTwo();
                 break;
+            case COUPAN_NUMBER:
+                mainObj.generateCoupanNumber();
+                break;
             default:
                 System.out.println("INVALID CHOICE");
                 break;
         }
+    }
+
+    private void generateCoupanNumber(){
+        char[] chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789".toCharArray();
+        System.out.println("Enter number length");
+        int num=sc.nextInt();
+        StringBuffer sb=new StringBuffer();
+        for (int i = 0; i < num; i++) {
+            char c = chars[(int) (Math.random() * chars.length)];
+            sb.append(c);
+        }
+        String couponCode=sb.toString();
+        System.out.println("Coupon Code: "+couponCode);
     }
 
     private void reverseNumber() {
