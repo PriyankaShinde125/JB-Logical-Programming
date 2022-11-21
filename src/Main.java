@@ -1,19 +1,25 @@
 import java.util.Scanner;
 
 public class Main {
-    public static final int SQUARE_ROOT = 1;
-    public static final int CONVERT_TO_BINARY = 2;
-    public static final int SWAP_NIBBLES = 3;
+    public static final int PRINT_FIBONACCI_SERIES = 1;
+    public static final int SQUARE_ROOT = 5;
+    public static final int CONVERT_TO_BINARY = 6;
+    public static final int SWAP_NIBBLES = 7;
     static Scanner sc;
 
     public static void main(String[] args) {
         System.out.println("Enter your choice : ");
-        System.out.println("1 : find square root");
-        System.out.println("2 : print equivalent binary");
-        System.out.println("3 : Print decimal number after swapping two nibbles");
+        System.out.println("1 : Print fibonacci series");
+        System.out.println("5 : find square root");
+        System.out.println("6 : print equivalent binary");
+        System.out.println("7 : Print decimal number after swapping two nibbles");
         sc = new Scanner(System.in);
+        Main mainObj = new Main();
         int choice = sc.nextInt();
         switch (choice) {
+            case PRINT_FIBONACCI_SERIES:
+                mainObj.printFibonacci();
+                break;
             case SQUARE_ROOT:
                 findSqrt();
                 break;
@@ -28,6 +34,21 @@ public class Main {
             default:
                 System.out.println("INVALID CHOICE");
                 break;
+        }
+    }
+
+    private void printFibonacci() {
+        int num1 = 0;
+        int num2 = 1;
+        int num3;
+        System.out.println("How many terms do you want : ");
+        int uptoTerm = sc.nextInt();
+        System.out.print(num1 + " " + num2);
+        for (int term = 2; term < uptoTerm; ++term) {
+            num3 = num1 + num2;
+            System.out.print(" " + num3);
+            num1 = num2;
+            num2 = num3;
         }
     }
 
