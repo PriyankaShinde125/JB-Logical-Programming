@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Main {
     public static final int PRINT_FIBONACCI_SERIES = 1;
+    public static final int PERFECT_NUMBER = 2;
     public static final int SQUARE_ROOT = 5;
     public static final int CONVERT_TO_BINARY = 6;
     public static final int SWAP_NIBBLES = 7;
@@ -10,6 +11,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Enter your choice : ");
         System.out.println("1 : Print fibonacci series");
+        System.out.println("2 : Check whether it is perfect number");
         System.out.println("5 : find square root");
         System.out.println("6 : print equivalent binary");
         System.out.println("7 : Print decimal number after swapping two nibbles");
@@ -19,6 +21,9 @@ public class Main {
         switch (choice) {
             case PRINT_FIBONACCI_SERIES:
                 mainObj.printFibonacci();
+                break;
+            case PERFECT_NUMBER:
+                mainObj.isPerfect();
                 break;
             case SQUARE_ROOT:
                 findSqrt();
@@ -35,6 +40,19 @@ public class Main {
                 System.out.println("INVALID CHOICE");
                 break;
         }
+    }
+
+    private void isPerfect() {
+        System.out.println("Enter a number : ");
+        int num = sc.nextInt();
+        int sum = 0;
+        int upto = num / 2;
+        for (int term = 1; term <= upto; term++) {
+            if (num % term == 0) {
+                sum += term;
+            }
+        }
+        System.out.println(num == sum ? "It is perfect number" : "It is not perfect number");
     }
 
     private void printFibonacci() {
