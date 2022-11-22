@@ -1,3 +1,8 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.Scanner;
 
 public class Main {
@@ -8,7 +13,14 @@ public class Main {
     public static final int SQUARE_ROOT = 5;
     public static final int CONVERT_TO_BINARY = 6;
     public static final int SWAP_NIBBLES = 7;
-    public static final int COUPAN_NUMBER = 8;
+    public static final int COUPON_NUMBER = 8;
+    public static final int STOPWATCH_SIMULATOR = 9;
+    public static final int ZERO = 0;
+    public static final int TEN = 10;
+    public static final int TWO = 2;
+    public static final int ONE = 1;
+
+
     static Scanner sc;
 
     public static void main(String[] args) {
@@ -20,7 +32,8 @@ public class Main {
         System.out.println("5 : find square root");
         System.out.println("6 : print equivalent binary");
         System.out.println("7 : Print decimal number after swapping two nibbles");
-        System.out.println("8 : Generate coupan number");
+        System.out.println("8 : Generate coupon number");
+        System.out.println("9 : Stopwatch simulator");
         sc = new Scanner(System.in);
         Main mainObj = new Main();
         int choice = sc.nextInt();
@@ -48,8 +61,11 @@ public class Main {
                 Binary b = new Binary();
                 b.isPowerOfTwo();
                 break;
-            case COUPAN_NUMBER:
-                mainObj.generateCoupanNumber();
+            case COUPON_NUMBER:
+                mainObj.generateCouponNumber();
+                break;
+            case STOPWATCH_SIMULATOR:
+                mainObj.getElapseTime();
                 break;
             default:
                 System.out.println("INVALID CHOICE");
@@ -57,27 +73,60 @@ public class Main {
         }
     }
 
-    private void generateCoupanNumber(){
-        char[] chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789".toCharArray();
+    private void getElapseTime() {
+        long startTime = 0;
+        long endTime;
+        DateFormat simple = new SimpleDateFormat("hh:mm:ss");
+
+        System.out.println("Enter 1 for start stopwatch");
+        sc.nextByte();
+        startTime = System.currentTimeMillis();
+
+        System.out.println("Enter 2 for end stopwatch");
+        sc.nextByte();
+        endTime = System.currentTimeMillis();
+
+        long elapsedTime = endTime - startTime;
+        Duration duration = Duration.ofMillis(elapsedTime);
+        long elapsedTimeHh = duration.toHours();
+        long elapsedTimeMm = duration.toMinutesPart();
+        long elapsedTimeSs = duration.toSecondsPart();
+        String elapsedTimeString = String.format("%02d:%02d:%02d", elapsedTimeHh, elapsedTimeMm, elapsedTimeSs);
+
+        System.out.println("start time = " + simple.format(new Date(startTime)));
+        System.out.println("end time = " + simple.format(new Date(endTime)));
+        System.out.println("Elapsed Time is = "+ elapsedTimeString);
+    }
+
+    private void generateCouponNumber() {
         System.out.println("Enter number length");
-        int num=sc.nextInt();
-        StringBuffer sb=new StringBuffer();
-        for (int i = 0; i < num; i++) {
-            char c = chars[(int) (Math.random() * chars.length)];
-            sb.append(c);
+        short num = sc.nextShort();
+        LinkedHashSet<Byte> couponDigits = new LinkedHashSet<>();
+        short iterations = 0;
+
+        while (couponDigits.size() < num) {
+            byte randomNum = (byte) (Math.random() * TEN);
+            couponDigits.add(randomNum);
+            iterations++;
         }
-        String couponCode=sb.toString();
-        System.out.println("Coupon Code: "+couponCode);
+
+        String couponNumber = "";
+        for (byte couponDigit : couponDigits) {
+            couponNumber = couponNumber + couponDigit;
+        }
+
+        System.out.println("Coupon Code: " + couponNumber);
+        System.out.println("Number of times random number generated to get distinct values = " + iterations);
     }
 
     private void reverseNumber() {
         System.out.println("Enter a number : ");
         int num = sc.nextInt();
-        int reverse = 0;
-        while (num > 0) {
-            int rem = num % 10;
-            reverse = reverse * 10 + rem;
-            num = num / 10;
+        int reverse = ZERO;
+        while (num > ZERO) {
+            int rem = num % TEN;
+            reverse = reverse * TEN + rem;
+            num = num / TEN;
         }
         System.out.println("Reverse number is " + reverse);
     }
@@ -86,11 +135,11 @@ public class Main {
         System.out.println("Enter a number : ");
         int num = sc.nextInt();
         boolean isPrime = true;
-        if (num == 2)
+        if (num == TWO)
             isPrime = true;
         else {
-            for (int i = 2; i < num / 2; i++) {
-                if (num % i == 0) {
+            for (int i = TWO; i < num / TWO; i++) {
+                if (num % i == ZERO) {
                     isPrime = false;
                     break;
                 }
@@ -102,10 +151,10 @@ public class Main {
     private void isPerfect() {
         System.out.println("Enter a number : ");
         int num = sc.nextInt();
-        int sum = 0;
-        int upto = num / 2;
-        for (int term = 1; term <= upto; term++) {
-            if (num % term == 0) {
+        int sum = ZERO;
+        int upto = num / TWO;
+        for (int term = ONE; term <= upto; term++) {
+            if (num % term == ZERO) {
                 sum += term;
             }
         }
@@ -113,13 +162,13 @@ public class Main {
     }
 
     private void printFibonacci() {
-        int num1 = 0;
-        int num2 = 1;
+        int num1 = ZERO;
+        int num2 = ONE;
         int num3;
         System.out.println("How many terms do you want : ");
         int uptoTerm = sc.nextInt();
         System.out.print(num1 + " " + num2);
-        for (int term = 2; term < uptoTerm; ++term) {
+        for (int term = TWO; term < uptoTerm; ++term) {
             num3 = num1 + num2;
             System.out.print(" " + num3);
             num1 = num2;
@@ -134,7 +183,7 @@ public class Main {
         num = sc.nextDouble();
         double t = num;
         double root;
-        int count = 0;
+        int count = ZERO;
 
         while (true) {
             count++;
@@ -151,16 +200,16 @@ public class Main {
         System.out.println("Enter a decimal integer ");
         decimal = sc.nextInt();
         int size = 8;
-        int base = 2;
+        int base = TWO;
         int binary[] = new int[size];
-        int index = 0;
-        int binaryNum = 0;
-        while (decimal > 0) {
+        int index = ZERO;
+        int binaryNum = ZERO;
+        while (decimal > ZERO) {
             binary[index++] = decimal % base;
             decimal = decimal / base;
         }
-        for (int i = size - 1; i >= 0; i--) {
-            binaryNum = binaryNum * 10 + binary[i];
+        for (int i = size - ONE; i >= ZERO; i--) {
+            binaryNum = binaryNum * TEN + binary[i];
         }
         return String.valueOf(binaryNum);
     }
