@@ -16,6 +16,7 @@ public class Main {
     public static final int COUPON_NUMBER = 8;
     public static final int STOPWATCH_SIMULATOR = 9;
     public static final int DAY_OF_WEEK = 10;
+    public static final int TEMPERATURE_CONVERSION = 11;
     public static final int ZERO = 0;
     public static final int TEN = 10;
     public static final int TWO = 2;
@@ -36,6 +37,7 @@ public class Main {
         System.out.println("8 : Generate coupon number");
         System.out.println("9 : Stopwatch simulator");
         System.out.println("10 : Day of the week");
+        System.out.println("11 : Temperature conversion");
         sc = new Scanner(System.in);
         Main mainObj = new Main();
         int choice = sc.nextInt();
@@ -74,7 +76,16 @@ public class Main {
                 int m = Integer.parseInt(args[ONE]);
                 int y = Integer.parseInt(args[TWO]);
                 int dayOfWeek = Util.dayOfWeek(d, m, y);
-                System.out.println(dayOfWeek);
+                System.out.println("Day of the week is " + dayOfWeek);
+                break;
+            case TEMPERATURE_CONVERSION:
+                System.out.println("Enter temperature");
+                double temp = sc.nextDouble();
+                System.out.println("Press 1 for celcius to fahrenheit conversion");
+                System.out.println("Press 2 for fahrenheit to celcius conversion");
+                int conversionType = sc.nextInt();
+                double convertedTemp = Util.temperatureConversion(temp, conversionType);
+                System.out.println("Converted temperature is = " + convertedTemp);
                 break;
             default:
                 System.out.println("INVALID CHOICE");
