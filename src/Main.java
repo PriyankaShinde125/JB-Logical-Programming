@@ -15,6 +15,7 @@ public class Main {
     public static final int SWAP_NIBBLES = 7;
     public static final int COUPON_NUMBER = 8;
     public static final int STOPWATCH_SIMULATOR = 9;
+    public static final int DAY_OF_WEEK = 10;
     public static final int ZERO = 0;
     public static final int TEN = 10;
     public static final int TWO = 2;
@@ -34,6 +35,7 @@ public class Main {
         System.out.println("7 : Print decimal number after swapping two nibbles");
         System.out.println("8 : Generate coupon number");
         System.out.println("9 : Stopwatch simulator");
+        System.out.println("10 : Day of the week");
         sc = new Scanner(System.in);
         Main mainObj = new Main();
         int choice = sc.nextInt();
@@ -67,6 +69,13 @@ public class Main {
             case STOPWATCH_SIMULATOR:
                 mainObj.getElapseTime();
                 break;
+            case DAY_OF_WEEK:
+                int d = Integer.parseInt(args[ZERO]);
+                int m = Integer.parseInt(args[ONE]);
+                int y = Integer.parseInt(args[TWO]);
+                int dayOfWeek = Util.dayOfWeek(d, m, y);
+                System.out.println(dayOfWeek);
+                break;
             default:
                 System.out.println("INVALID CHOICE");
                 break;
@@ -95,7 +104,7 @@ public class Main {
 
         System.out.println("start time = " + simple.format(new Date(startTime)));
         System.out.println("end time = " + simple.format(new Date(endTime)));
-        System.out.println("Elapsed Time is = "+ elapsedTimeString);
+        System.out.println("Elapsed Time is = " + elapsedTimeString);
     }
 
     private void generateCouponNumber() {
